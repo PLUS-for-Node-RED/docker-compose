@@ -2,6 +2,8 @@ FROM node:16-alpine
 
 ARG REGISTRY
 ARG REGISTRY_TOKEN
+ARG BUILD_TAG=latest
+
 RUN if [[ ! -z "$REGISTRY_TOKEN" ]]; then echo "//$REGISTRY/:_authToken=$REGISTRY_TOKEN" >> ~/.npmrc ; fi
 RUN if [[ ! -z "$REGISTRY" ]] ; then npm config set @flowforge:registry "https://$REGISTRY"; fi
 
@@ -10,19 +12,21 @@ RUN npm config set python `which python3` --global
 
 WORKDIR /usr/src/forge
 RUN mkdir app bin etc var
+COPY .npmrc /usr/src/forge/app
 COPY package.json /usr/src/forge/app
 WORKDIR /usr/src/forge/app
 RUN npm install --production --no-audit --no-fund 
 
 ENV FLOWFORGE_HOME=/usr/src/forge
+ENV P4NR_LICENSE_TOKEN=community
 
-LABEL org.label-schema.name="Flowforge Docker" \
-    org.label-schema.url="https://flowforge.com" \
+LABEL org.label-schema.name="Flowforge P4NR Docker" \
+    org.label-schema.url="https://p4nr.com" \
     org.label-schema.vcs-type="Git" \
-    org.label-schema.vcs-url="https://github.com/flowforge/docker-compose" \
+    org.label-schema.vcs-url="https://github.com/PLUS-for-Node-RED/docker-compose" \
     org.label-schema.docker.dockerfile="flowforge-docker/Dockerfile" \
-    org.schema-label.description="Collaborative, low code integration and automation environment" \
-    authors="Flowforge Inc."
+    org.schema-label.description="Collaborative, industrial low code integration and automation environment" \
+    authors="Iniationware"
 
 
 EXPOSE 3000
