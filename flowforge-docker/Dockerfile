@@ -15,7 +15,7 @@ RUN mkdir app bin etc var
 COPY .npmrc /usr/src/forge/app
 COPY package.json /usr/src/forge/app
 WORKDIR /usr/src/forge/app
-RUN npm install --production --no-audit --no-fund 
+RUN npm install --production --no-audit --no-fund
 
 ENV FLOWFORGE_HOME=/usr/src/forge
 ENV P4NR_LICENSE_TOKEN=community
@@ -23,7 +23,7 @@ ENV P4NR_LICENSE_TOKEN=community
 LABEL org.label-schema.name="Flowforge P4NR Docker" \
     org.label-schema.url="https://p4nr.com" \
     org.label-schema.vcs-type="Git" \
-    org.label-schema.vcs-url="https://github.com/PLUS-for-Node-RED/docker-compose" \
+    org.label-schema.vcs-url="https://github.com/PLUS-for-Node-RED/flowforge-docker-compose" \
     org.label-schema.docker.dockerfile="flowforge-docker/Dockerfile" \
     org.schema-label.description="Collaborative, industrial low code integration and automation environment" \
     authors="Iniationware"
