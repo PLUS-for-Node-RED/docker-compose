@@ -1,6 +1,18 @@
-#### 1.2.1: Release
+#### 1.6.1: Release
 
- - Update to FlowForge 1.2.1
+#### 1.6.0: Release
+
+
+#### 1.5.0: Release
+
+
+#### 1.4.0: Release
+
+
+#### 1.3.0: Release
+
+ - Only create DB if it doesn't exist (#75) @hardillb
+ - Ensure DB setup scripts run in the correct order (#74) @hardillb
 
 #### 1.2.0: Release
 
