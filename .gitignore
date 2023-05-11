@@ -2,3 +2,5 @@ db
 fileStorage
 
 .idea/
+
+*.docker
