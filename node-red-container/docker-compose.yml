@@ -13,12 +13,20 @@ services:
         - /etc/localtime:/etc/localtime:ro
         - /etc/timezone:/etc/timezone:ro
         - data:/data
+        - config:/config
+        - nodes:/nodes
       ports:
-        - "1881:1880"
+        - "1881:1881"
         - "1502:10502"
         - "14840:14840"
         - "14841:14841"
+        - "14842:14842"
+        - "14845:14845"
 
 volumes:
   data:
+    driver: local
+  config:
+    driver: local
+  nodes:
     driver: local

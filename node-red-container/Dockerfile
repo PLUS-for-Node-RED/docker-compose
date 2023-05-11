@@ -8,36 +8,57 @@ ARG BUILD_TAG=latest
 RUN if [[ ! -z "$REGISTRY_TOKEN" ]]; then echo "//$REGISTRY/:_authToken=$REGISTRY_TOKEN" >> ~/.npmrc ; fi
 RUN if [[ ! -z "$REGISTRY" ]] ; then npm config set @flowforge:registry "https://$REGISTRY"; fi
 
+USER root
+
+RUN mkdir /config
+
+RUN mkdir /nodes
+
+VOLUME ["/config", "/nodes"]
+
 COPY .npmrc /data
 COPY package.json /data
 
-USER root
+COPY .npmrc /config
+COPY settings.js /config
+
+COPY .npmrc /nodes
+
+RUN chown -R node-red:node-red /data
+
+RUN chown -R node-red:node-red /config
+
+RUN chown -R node-red:node-red /nodes
 
 WORKDIR /data
-RUN chown node-red:node-red /data/*
 
 RUN export P4NR_LICENSE_TOKEN=$P4NR_LICENSE_TOKEN
 RUN source .npmrc
 
 RUN npm install
 
-RUN npm install -g debug
+RUN npm install --location=global npm
+
+RUN npm cache verify
 
 RUN npm install node-red-dashboard
+RUN npm install node-red-contrib-helper
+RUN npm install @node-red-contrib-themes/theme-collection
 
 RUN npm install @plus4nodered/node-red-contrib-opcua-client
 RUN npm install @plus4nodered/node-red-contrib-opcua-services
-RUN npm install @plus4nodered/node-red-contrib-opcua-buttons
 RUN npm install @plus4nodered/node-red-contrib-opcua-tools
 RUN npm install @plus4nodered/node-red-contrib-opcua-servers
-RUN npm install @plus4nodered/node-red-contrib-opcua-mutable-server
 
 # legacy packages for old flows
 RUN npm install node-red-contrib-modbus
 RUN npm install node-red-contrib-opcua
 RUN npm install node-red-contrib-iiot-opcua
 
-RUN chown node-red:node-red /data/*
+RUN npm cache verify
+
+RUN chown -R node-red:node-red /data
+
 USER node-red
 
 ENV NODE_PATH=/usr/src/node-red
@@ -51,6 +72,6 @@ LABEL org.label-schema.name="P4NR Node-RED" \
     org.schema-label.description="Collaborative, industrial low code integration and automation environment" \
     authors="Iniationware"
 
-EXPOSE 1880
+EXPOSE 1881
 
-ENTRYPOINT ["node-red", "--userDir", "/data"]
+ENTRYPOINT ["node-red", "--settings", "/config/settings.js", "--userDir", "/data"]
