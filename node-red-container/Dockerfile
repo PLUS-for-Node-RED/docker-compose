@@ -45,10 +45,11 @@ RUN npm install node-red-dashboard
 RUN npm install node-red-contrib-helper
 RUN npm install @node-red-contrib-themes/theme-collection
 
-RUN npm install @plus4nodered/node-red-contrib-opcua-client
-RUN npm install @plus4nodered/node-red-contrib-opcua-services
-RUN npm install @plus4nodered/node-red-contrib-opcua-tools
-RUN npm install @plus4nodered/node-red-contrib-opcua-servers
+RUN npm install @plus4nodered/node-red-contrib-opcua-client@~1.0.0
+RUN npm install @plus4nodered/node-red-contrib-opcua-services@~1.0.0
+RUN npm install @plus4nodered/node-red-contrib-opcua-tools@~1.0.0
+RUN npm install @plus4nodered/node-red-contrib-opcua-servers@~1.0.0
+RUN npm install @plus4nodered/node-red-contrib-opcua-mutable-server@~1.0.0
 
 # legacy packages for old flows
 RUN npm install node-red-contrib-modbus
@@ -62,7 +63,7 @@ RUN chown -R node-red:node-red /data
 USER node-red
 
 ENV NODE_PATH=/usr/src/node-red
-ENV P4NR_LICENSE_TOKEN=community
+ENV P4NR_LICENSE_TOKEN=$P4NR_LICENSE_TOKEN
 
 LABEL org.label-schema.name="P4NR Node-RED" \
     org.label-schema.url="https://p4nr.com" \
