@@ -5,9 +5,6 @@ ARG REGISTRY
 ARG REGISTRY_TOKEN
 ARG BUILD_TAG=latest
 
-RUN if [[ ! -z "$REGISTRY_TOKEN" ]]; then echo "//$REGISTRY/:_authToken=$REGISTRY_TOKEN" >> ~/.npmrc ; fi
-RUN if [[ ! -z "$REGISTRY" ]] ; then npm config set @flowforge:registry "https://$REGISTRY"; fi
-
 USER root
 
 RUN mkdir /config
@@ -45,11 +42,11 @@ RUN npm install node-red-dashboard
 RUN npm install node-red-contrib-helper
 RUN npm install @node-red-contrib-themes/theme-collection
 
-RUN npm install @plus4nodered/node-red-contrib-opcua-client@~1.0.0
-RUN npm install @plus4nodered/node-red-contrib-opcua-services@~1.0.0
-RUN npm install @plus4nodered/node-red-contrib-opcua-tools@~1.0.0
-RUN npm install @plus4nodered/node-red-contrib-opcua-servers@~1.0.0
-RUN npm install @plus4nodered/node-red-contrib-opcua-mutable-server@~1.0.0
+RUN npm install @plus4nodered/node-red-contrib-opcua-client
+RUN npm install @plus4nodered/node-red-contrib-opcua-services
+RUN npm install @plus4nodered/node-red-contrib-opcua-tools
+RUN npm install @plus4nodered/node-red-contrib-opcua-servers
+RUN npm install @plus4nodered/node-red-contrib-opcua-mutable-server
 
 # legacy packages for old flows
 RUN npm install node-red-contrib-modbus

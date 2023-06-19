@@ -23,6 +23,17 @@
 
     docker-compose up
 
+### Build Image for multiple architectures with buildx and directly push it to cloudsmith (Cannot be used locally)
+
+    cd node-red-container
+
+    docker login docker.cloudsmith.io
+
+    export P4NR_LICENSE_TOKEN=$NPM_TOKEN
+
+    docker buildx build . --platform 'linux/amd64,linux/arm64,linux/arm/v7' -t docker.cloudsmith.io/iniationware-gmbh/flowforge/p4nr/node-red:latest --build-arg P4NR_LICENSE_TOKEN=$NPM_TOKEN --no-cache -o type=registry --provenance=false
+
+
 ### Push Docker Image to Cloudsmith
 
     docker login docker.cloudsmith.io
