@@ -4,7 +4,7 @@ version: '3.1'
 services:
     nodered:
       container_name: node_red
-      image: p4nr/node-red:latest
+      image: docker.cloudsmith.io/iniationware-gmbh/flowforge/p4nr/node-red:latest
       restart: always
       environment:
         - TZ=Europe/Amsterdam

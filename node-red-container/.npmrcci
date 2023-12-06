@@ -1,0 +1,5 @@
+@p4nr:registry=https://npm.cloudsmith.io/iniationware-gmbh/p4nrci/
+@p4nree:registry=https://npm.cloudsmith.io/iniationware-gmbh/p4nrci/
+@plus4nodered:registry=https://npm.cloudsmith.io/iniationware-gmbh/p4nrci/
+//npm.cloudsmith.io/iniationware-gmbh/p4nrci/:_authToken=${NPM_TOKEN}
+registry=https://registry.npmjs.org/

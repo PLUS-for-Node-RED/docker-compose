@@ -32,7 +32,7 @@ module.exports = {
  ******************************************************************************/
 
     /** The file containing the flows. If not set, defaults to flows_<hostname>.json **/
-    flowFile: 'flows.json',
+    flowFile: '/nodes/flows.json',
 
     /** By default, credentials are encrypted in storage using a generated key. To
      * specify your own secret, set the following property.
@@ -299,6 +299,37 @@ module.exports = {
             metrics: false,
             /** Whether or not to include audit events in the log output */
             audit: false
+        },
+        customLogger: {
+            level: "off",
+            metrics: true,
+            handler: function (settings) {
+
+                if(process?.env?.NR_METRICS === "true"){
+                    var net = require('net');
+                    var logHost =  process?.env?.NR_METRICS_HOST || '192.168.8.184'
+                    var logPort = parseInt(process?.env?.NR_METRICS_PORT) || 9564;
+                    var conn = new net.Socket();
+                    conn.connect(logPort,logHost)
+                      .on('connect',function() {
+                          console.log("Logger connected")
+                      })
+                      .on('error', function(err) {
+                          console.log("Error on metrics logger: " + err)
+                          setTimeout(() => {
+                              conn.connect(logPort,logHost)
+                          }, 3000)
+                      });
+                }
+
+                return function (msg) {
+                    if(process?.env?.NR_METRICS === "true"){
+                        try {
+                            conn.write(JSON.stringify(msg)+"\n");
+                        }catch(err) { console.log(err);}
+                    }
+                }
+            }
         }
     },
 
