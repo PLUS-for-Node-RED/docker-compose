@@ -1,4 +1,4 @@
-FROM nodered/node-red:latest
+FROM nodered/node-red:latest-18
 
 ARG P4NR_LICENSE_TOKEN
 ARG REGISTRY
@@ -58,6 +58,7 @@ RUN npm cache verify
 RUN chown -R node-red:node-red /data
 
 USER node-red
+RUN npm install @flowfuse/nr-launcher@${BUILD_TAG}
 
 ENV NODE_PATH=/usr/src/node-red
 ENV P4NR_LICENSE_TOKEN=$P4NR_LICENSE_TOKEN
@@ -71,5 +72,4 @@ LABEL org.label-schema.name="P4NR Node-RED" \
     authors="Iniationware"
 
 EXPOSE 1881
-
-ENTRYPOINT ["node-red", "--settings", "/config/settings.js", "--userDir", "/data"]
+ENTRYPOINT ["./node_modules/.bin/flowfuse-node-red", "-p", "2880", "-n", "/usr/src/node-red"]

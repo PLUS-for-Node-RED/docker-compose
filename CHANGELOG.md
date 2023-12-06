@@ -1,3 +1,46 @@
+#### 1.14.1: Release
+
+ - Update file server and driver-docker npm references (#110) @knolleary
+
+#### 1.14.0: Release
+
+ - Update to @flowfuse/nr-launcher (#108) @knolleary
+
+#### 1.13:1: Release
+
+ - Bump to FlowFuse v1.13.1 @hardillb
+
+#### 1.13.0: Release
+
+
+#### 1.12.2: Release
+
+ - Bump to FlowForge v1.12.2 @hardillb
+
+#### 1.12.1: Release
+
+ - Bump to FlowForge v1.12.1 @hardillb
+
+#### 1.12.0: Release
+
+ - ensure acme-companion restarts on failure (#100) @hardillb
+ - Add note about docker-compose version (#99) @hardillb
+ - Add step to end of release action to reset maintenance (#98) @hardillb
+
+#### 1.11.0: Release
+
+
+#### 1.10.1: Release
+
+ - Bump to FlowForge v1.10.1
+
+#### 1.10.0: Release
+
+ - Add config to set max body size (#93) @hardillb
+
+#### 1.9.0: Release
+
+
 #### 1.8.0: Release
 
 
