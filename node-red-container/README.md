@@ -31,7 +31,7 @@
 
     export P4NR_LICENSE_TOKEN=$NPM_TOKEN
 
-    docker buildx build . --platform 'linux/amd64,linux/arm64,linux/arm/v7' -t docker.cloudsmith.io/iniationware-gmbh/flowforge/p4nr/node-red:latest --build-arg P4NR_LICENSE_TOKEN=$NPM_TOKEN --no-cache -o type=registry --provenance=false
+    docker buildx build . --platform 'linux/amd64,linux/arm64,linux/arm/v7' -t docker.cloudsmith.io/iniationware-gmbh/p4nree/p4nr/node-red:1.0.0 -t docker.cloudsmith.io/iniationware-gmbh/p4nree/p4nr/node-red:latest --build-arg P4NR_LICENSE_TOKEN=$NPM_TOKEN --no-cache -o type=registry --provenance=false
 
 
 ### Push Docker Image to Cloudsmith

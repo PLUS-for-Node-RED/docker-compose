@@ -4,8 +4,8 @@ version: '3.1'
 services:
     nodered:
       container_name: node_red
-      image: docker.cloudsmith.io/iniationware-gmbh/flowforge/p4nr/node-red:latest
-      restart: always
+      image: p4nr/node-red:latest
+      restart: unless-stopped
       environment:
         - TZ=Europe/Amsterdam
         - P4NR_LICENSE_TOKEN=$NPM_TOKEN
@@ -16,12 +16,8 @@ services:
         - config:/config
         - nodes:/nodes
       ports:
-        - "1881:1881"
-        - "1502:10502"
-        - "14840:14840"
-        - "14841:14841"
-        - "14842:14842"
-        - "14845:14845"
+        - "1885:1881"
+        - "1503:10502"
 
 volumes:
   data:

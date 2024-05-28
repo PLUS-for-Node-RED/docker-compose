@@ -42,6 +42,8 @@ RUN npm install node-red-dashboard
 RUN npm install node-red-contrib-helper
 RUN npm install @node-red-contrib-themes/theme-collection
 
+RUN npm install @p4nr/node-opcua-webapp-framework
+
 RUN npm install @plus4nodered/node-red-contrib-opcua-client
 RUN npm install @plus4nodered/node-red-contrib-opcua-services
 RUN npm install @plus4nodered/node-red-contrib-opcua-tools
@@ -58,7 +60,8 @@ RUN npm cache verify
 RUN chown -R node-red:node-red /data
 
 USER node-red
-RUN npm install @flowfuse/nr-launcher@${BUILD_TAG}
+
+# RUN npm install @flowfuse/nr-launcher@${BUILD_TAG}
 
 ENV NODE_PATH=/usr/src/node-red
 ENV P4NR_LICENSE_TOKEN=$P4NR_LICENSE_TOKEN
@@ -72,4 +75,5 @@ LABEL org.label-schema.name="P4NR Node-RED" \
     authors="Iniationware"
 
 EXPOSE 1881
-ENTRYPOINT ["./node_modules/.bin/flowfuse-node-red", "-p", "2880", "-n", "/usr/src/node-red"]
+
+ENTRYPOINT ["node-red", "--settings", "/config/settings.js", "--userDir", "/data"]
